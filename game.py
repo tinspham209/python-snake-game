@@ -94,7 +94,7 @@ class Game():
   def drawPressKeyMgs(self):
     pressKeySurf = self.BASICFONT.render('Press a key UP to play again', True, Config.WHITE)
     pressKeyRect = pressKeySurf.get_rect()
-    pressKeyRect.topleft = (Config.WINDOW_WIDTH - 220, Config.WINDOW_HEIGHT - 30)
+    pressKeyRect.topleft = (Config.WINDOW_WIDTH - 250, Config.WINDOW_HEIGHT - 30)
     self.screen.blit(pressKeySurf, pressKeyRect)
 
   def isGameOver(self):
