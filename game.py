@@ -78,6 +78,12 @@ class Game():
 
     return True
 
+  def drawPressKeyMgs(self):
+    pressKeySurf = self.BASICFONT.render('Press a key to play', True, Config.DARKGRAY)
+    pressKeyRect = pressKeySurf.get_rect()
+    pressKeyRect.topleft = (Config.WINDOW_WIDTH - 200, Config.WINDOW_HEIGHT - 30)
+    self.screen.blit(pressKeySurf, pressKeyRect)
+
   def isGameOver(self):
     if(self.snake.wormCoords[self.snake.HEAD]['x'] == -1 or
             self.snake.wormCoords[self.snake.HEAD]['x'] == Config.CELLWIDTH or
