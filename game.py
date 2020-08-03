@@ -2,6 +2,7 @@ from config import Config
 from snake import Snake
 from apple import Apple
 import pygame
+import sys
 
 
 class Game():
