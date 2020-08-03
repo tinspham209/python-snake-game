@@ -36,6 +36,16 @@ class Game():
     if event.key == pygame.K_ESCAPE:
       pygame.quit()
 
+  def isGameOver(self):
+    if(self.snake.wormCoords[self.snake.HEAD]['x'] == -1 or
+            self.snake.wormCoords[self.snake.HEAD]['x'] == Config.CELLWIDTH or
+            self.snake.wormCoords[self.snake.HEAD]['y'] == -1 or
+            self.snake.wormCoords[self.snake.HEAD]['y'] == Config.CELLHEIGHT):
+      return self.resetGame()
+    for wormBody in self.snake.wormCoords[1:]:
+      if wormBody['x'] == self.snake.wormCoords[self.snake.HEAD]['x'] and wormBody['y'] == self.snake.wormCoords[self.snake.HEAD]['y']:
+        return self.resetGame()
+
   def run(self):
     while True:  # main game loop
       for event in pygame.event.get():
