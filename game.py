@@ -89,6 +89,10 @@ class Game():
         return self.resetGame()
 
   def run(self):
+    while True:
+      self.gameLoop()
+
+  def gameLoop(self):
     while True:  # main game loop
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
