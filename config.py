@@ -14,7 +14,7 @@ class Config():
   BLACK = (0, 0, 0)
   RED = (255, 0, 0)
   GREEN = (0, 255, 0)
-  DARKRED = (255, 237, 237)
+  DARKRED = (139, 0, 0)
   DARKGREEN = (0, 155, 0)
   DARKGRAY = (40, 40, 40)
   BG_COLOR = BLACK
