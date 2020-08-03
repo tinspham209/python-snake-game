@@ -15,6 +15,27 @@ class Game():
         self.apple = Apple()
         self.snake = Snake()
 
+    def drawGrid(self):
+        # draw vertical lines
+        for x in range(0, Config.WINDOW_WIDTH, Config.CELLSIZE):
+            pygame.draw.line(self.screen, Config.DARKGRAY,
+                             (x, 0), (x, Config.WINDOW_HEIGHT))
+        # draw horizontal lines
+        for y in range(0, Config.WINDOW_HEIGHT, Config.CELLSIZE):
+            pygame.draw.line(self.screen, Config.DARKGRAY,
+                             (0, y), (Config.WINDOW_WIDTH, y))
+
+    def draw(self):
+        self.screen.fill(Config.BG_COLOR)
+        # in here well draw snake, grid, apple, scroe
+        self.drawGrid()
+        pygame.display.update()
+        self.clock.tick(Config.FPS)
+
+    def handleKeyEvents(self, event):
+        if event.key == pygame.K_ESCAPE:
+            pygame.quit()
+
     def run(self):
         while True:  # main game loop
             for event in pygame.event.get():
@@ -22,10 +43,9 @@ class Game():
                     pygame.quit()
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
+                    self.handleKeyEvents(event)
 
-            self.screen.fill(Config.WHITE)
-            pygame.display.update()
-            self.clock.tick(60)
+            # self.snake.update(self.apple)
+            self.draw()
+            # if self.isGameOver():
+            #     break
