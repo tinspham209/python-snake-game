@@ -38,7 +38,9 @@ class Game():
     x = self.apple.x * Config.CELLSIZE
     y = self.apple.y * Config.CELLSIZE
     appleRect = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE)
-    pygame.draw.rect(self.screen, Config.RED, appleRect)
+    pygame.draw.rect(self.screen, Config.DARKRED, appleRect)
+    appleInnerRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8)
+    pygame.draw.rect(self.screen, Config.RED, appleInnerRect)
 
   def draw(self):
     self.screen.fill(Config.BG_COLOR)
