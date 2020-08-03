@@ -14,3 +14,18 @@ class Game():
         pygame.display.set_caption('Snake')
         self.apple = Apple()
         self.snake = Snake()
+
+    def run(self):
+        while True:  # main game loop
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+
+            self.screen.fill(Config.WHITE)
+            pygame.display.update()
+            self.clock.tick(60)
