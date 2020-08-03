@@ -88,9 +88,31 @@ class Game():
       if wormBody['x'] == self.snake.wormCoords[self.snake.HEAD]['x'] and wormBody['y'] == self.snake.wormCoords[self.snake.HEAD]['y']:
         return self.resetGame()
 
+  def displayGameOver(self):
+    gameOverFont = pygame.font.Font('freesansbold.ttf', 150)
+    gameSurf = gameOverFont.render('Game', True, Config.WHITE)
+    overSurf = gameOverFont.render('Over', True, Config.WHITE)
+    gameRect = gameSurf.get_rect()
+    overRect = overSurf.get_rect()
+    gameRect.midtop = (Config.WINDOW_WIDTH / 2, 10)
+    overRect.midtop = (Config.WINDOW_WIDTH / 2, gameRect.height + 10 + 25)
+    self.screen.blit(gameSurf, gameRect)
+    self.screen.blit(overSurf, overRect)
+
+    self.drawPressKeyMgs()
+    pygame.display.update()
+    pygame.time.wait(500)
+
+    self.checkForKeyPress()  # clear out any key presses in the event queue
+    while True:
+      if self.checkForKeyPress():
+        pygame.event.get()  # clear event queue
+        return
+
   def run(self):
     while True:
       self.gameLoop()
+      self.displayGameOver()
 
   def gameLoop(self):
     while True:  # main game loop
