@@ -36,6 +36,14 @@ class Game():
     if event.key == pygame.K_ESCAPE:
       pygame.quit()
 
+  def resetGame(self):
+    del self.snake
+    del self.apple
+    self.snake = Snake()
+    self.apple = Apple()
+
+    return True
+
   def isGameOver(self):
     if(self.snake.wormCoords[self.snake.HEAD]['x'] == -1 or
             self.snake.wormCoords[self.snake.HEAD]['x'] == Config.CELLWIDTH or
