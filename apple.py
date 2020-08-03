@@ -7,5 +7,5 @@ class Apple():
         self.setNewLocation()
 
     def setNewLocation(self):
-        self.x = random.ranint(0, Config.CELLWIDTH - 1)
-        self.y = random.ranint(0, Config.CELLHEIGHT - 1)
+        self.x = random.randint(0, Config.CELLWIDTH - 1)
+        self.y = random.randint(0, Config.CELLHEIGHT - 1)
