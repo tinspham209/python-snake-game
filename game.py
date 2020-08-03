@@ -34,11 +34,18 @@ class Game():
       wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8)
       pygame.draw.rect(self.screen, Config.GREEN, wormInnerSegmentRect)
 
+  def drawApple(self):
+    x = self.apple.x * Config.CELLSIZE
+    y = self.apple.y * Config.CELLSIZE
+    appleRect = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE)
+    pygame.draw.rect(self.screen, Config.RED, appleRect)
+
   def draw(self):
     self.screen.fill(Config.BG_COLOR)
     # in here well draw snake, grid, apple, scroe
     self.drawGrid()
     self.drawWorm()
+    self.drawApple()
     pygame.display.update()
     self.clock.tick(Config.FPS)
 
