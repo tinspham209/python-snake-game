@@ -58,6 +58,19 @@ class Game():
     pygame.display.update()
     self.clock.tick(Config.FPS)
 
+  def checkForKeyPress(self):
+    if len(pygame.event.get(pygame.QUIT)) > 0:
+      pygame.quit()
+
+    keyUpEvents = pygame.event.get(pygame.KEYUP)
+
+    if len(keyUpEvents) == 0:
+      return None
+    if keyUpEvents[0].key == pygame.K_ESCAPE:
+      pygame.quit()
+      quit()
+    return keyUpEvents[0].key
+
   def handleKeyEvents(self, event):
     if(event.key == pygame.K_LEFT or event.key == pygame.K_a) and (self.snake.direction != self.snake.RIGHT):
       self.snake.direction = self.snake.LEFT
