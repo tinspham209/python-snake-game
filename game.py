@@ -50,7 +50,15 @@ class Game():
     self.clock.tick(Config.FPS)
 
   def handleKeyEvents(self, event):
-    if event.key == pygame.K_ESCAPE:
+    if(event.key == pygame.K_LEFT or event.key == pygame.K_a) and (self.snake.direction != self.snake.RIGHT):
+      self.snake.direction = self.snake.LEFT
+    elif(event.key == pygame.K_RIGHT or event.key == pygame.K_d) and (self.snake.direction != self.snake.LEFT):
+      self.snake.direction = self.snake.RIGHT
+    elif(event.key == pygame.K_UP or event.key == pygame.K_w) and (self.snake.direction != self.snake.DOWN):
+      self.snake.direction = self.snake.UP
+    elif(event.key == pygame.K_DOWN or event.key == pygame.K_s) and (self.snake.direction != self.snake.UP):
+      self.snake.direction = self.snake.DOWN
+    elif event.key == pygame.K_ESCAPE:
       pygame.quit()
 
   def resetGame(self):
