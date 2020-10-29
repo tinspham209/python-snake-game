@@ -1,13 +1,15 @@
 class Config():
   FPS = 9
   MENU_FPS = 60
+
+  # 화면크기
   WINDOW_WIDTH = 640
   WINDOW_HEIGHT = 480
-  CELLSIZE = 20
+  CELLSIZE = 20 # 블록 크기
   assert WINDOW_WIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
   assert WINDOW_HEIGHT % CELLSIZE == 0, "Window height must be a multiple of cell size."
-  CELLWIDTH = int(WINDOW_WIDTH / CELLSIZE)
-  CELLHEIGHT = int(WINDOW_HEIGHT / CELLSIZE)
+  CELLWIDTH = int(WINDOW_WIDTH / CELLSIZE) # 가로 블록 갯수
+  CELLHEIGHT = int(WINDOW_HEIGHT / CELLSIZE) # 새로 블록 갯수
 
   # Colors
   WHITE = (255, 255, 255)
