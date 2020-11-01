@@ -7,60 +7,60 @@ import sys
 
 class Game():
   def __init__(self):
-    pygame.init()
-    self.screen = pygame.display.set_mode(
+    pygame.init() #pygame에 포함된 모듈들을 한꺼번에 초기화, 초기화 실패시 성공 및 실패 모듈 횟수를 튜플로 리턴
+    self.screen = pygame.display.set_mode(  # 윈도우 초기화, 생성. 파라미터:(윈도우 사이즈, 윈도우 타입, 뎁스, 등등)
         (Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT))
-    self.clock = pygame.time.Clock()
-    self.BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
-    pygame.display.set_caption('Snake')
-    self.apple = Apple()
-    self.snake = Snake()
+    self.clock = pygame.time.Clock() # 시간 트래킹 객체 생성
+    self.BASICFONT = pygame.font.Font('freesansbold.ttf', 18) # 폰트 (파일이름, 글자 크기)
+    pygame.display.set_caption('Snake') #윈도우 창에 게임 이름 표시
+    self.apple = Apple()  # 아이템 객체 할당
+    self.snake = Snake()  # 뱀 객체 할당
 
-  def drawGrid(self):
+  def drawGrid(self): # 격자 그리기 매소드
     # draw vertical lines
-    for x in range(0, Config.WINDOW_WIDTH, Config.CELLSIZE):
-      pygame.draw.line(self.screen, Config.DARKGRAY,
+    for x in range(0, Config.WINDOW_WIDTH, Config.CELLSIZE): # 720 한칸에 20
+      pygame.draw.line(self.screen, Config.DARKGRAY,  # 파라미터:(윈도우객체, 색, 시작지점, 종료지점, 너비)
                        (x, 0), (x, Config.WINDOW_HEIGHT))
     # draw horizontal lines
-    for y in range(0, Config.WINDOW_HEIGHT, Config.CELLSIZE):
-      pygame.draw.line(self.screen, Config.DARKGRAY,
+    for y in range(0, Config.WINDOW_HEIGHT, Config.CELLSIZE): # 480 한칸에 20
+      pygame.draw.line(self.screen, Config.DARKGRAY,  # 파라미터:(윈도우객체, 색, 시작지점, 종료지점, 너비)
                        (0, y), (Config.WINDOW_WIDTH, y))
 
   def drawWorm(self):
-    for coord in self.snake.wormCoords:
+    for coord in self.snake.wormCoords: # 뱀 객체 리스
       x = coord['x'] * Config.CELLSIZE
       y = coord['y'] * Config.CELLSIZE
-      wormSegmentReact = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE)
-      pygame.draw.rect(self.screen, Config.DARKGREEN, wormSegmentReact)
-      wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8)
+      wormSegmentReact = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE) # 사각형 객체를 생성하는 클래스 (x좌표,y좌표,너비,너비)
+      pygame.draw.rect(self.screen, Config.DARKGREEN, wormSegmentReact) # 파라미터: (윈도우객체, 색상, 사각형객체)
+      wormInnerSegmentRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8) # 안쪽 사각형 생성
       pygame.draw.rect(self.screen, Config.GREEN, wormInnerSegmentRect)
 
   def drawApple(self):
     x = self.apple.x * Config.CELLSIZE
     y = self.apple.y * Config.CELLSIZE
-    appleRect = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE)
-    pygame.draw.rect(self.screen, Config.DARKRED, appleRect)
-    appleInnerRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8)
+    appleRect = pygame.Rect(x, y, Config.CELLSIZE, Config.CELLSIZE) # 사각형 객체를 생성하는 클래스 (x좌표,y좌표,너비,너비)
+    pygame.draw.rect(self.screen, Config.DARKRED, appleRect) # 파라미터: (윈도우객체, 색상, 사각형객체)
+    appleInnerRect = pygame.Rect(x + 4, y + 4, Config.CELLSIZE - 8, Config.CELLSIZE - 8) # 안쪽 사각형 생성
     pygame.draw.rect(self.screen, Config.RED, appleInnerRect)
 
   def drawScore(self, score):
-    scoreSurf = self.BASICFONT.render('Score: %s' % (score), True, Config.WHITE)
-    scoreRect = scoreSurf.get_rect()
+    scoreSurf = self.BASICFONT.render('Score: %s' % (score), True, Config.WHITE) # 윈도우 위에 새로운 표면에 텍스트 렌더 (텍스트, 안티얼라이싱, 색, 백그라운드)
+    scoreRect = scoreSurf.get_rect() # 렌더된 텍스트의 사이즈와 오프셋 리턴
     scoreRect.topleft = (Config.WINDOW_WIDTH - 120, 10)
     self.screen.blit(scoreSurf, scoreRect)
 
-  def draw(self):
-    self.screen.fill(Config.BG_COLOR)
+  def draw(self): # 렌더링 메소드
+    self.screen.fill(Config.BG_COLOR) #배경색
     # in here well draw snake, grid, apple, scroe
     self.drawGrid()
     self.drawWorm()
     self.drawApple()
-    self.drawScore(len(self.snake.wormCoords) - 3)
-    pygame.display.update()
-    self.clock.tick(Config.FPS)
+    self.drawScore(len(self.snake.wormCoords) - 3) # 뱀 몸통 -3으로 점수계
+    pygame.display.update() # 윈도우의 부분적인 업데이트를 가능하게 하는 메소
+    self.clock.tick(Config.FPS) # 시간 업데이트 매개변수: (프레임레이트) 단위 ms
 
   def checkForKeyPress(self):
-    if len(pygame.event.get(pygame.QUIT)) > 0:
+    if len(pygame.event.get(pygame.QUIT)) > 0: # 이벤트 리스트가 0보다 크면
       pygame.quit()
 
     keyUpEvents = pygame.event.get(pygame.KEYUP)
