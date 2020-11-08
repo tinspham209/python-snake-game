@@ -1,15 +1,17 @@
-from config import Config
-from snake import Snake
-from apple import Apple
-import pygame
 import sys
+
+import pygame
+
+from apple import Apple
+from config import Config, screen
+from menu import Menu
+from snake import Snake
 
 
 class Game():
   def __init__(self):
     pygame.init() #pygame에 포함된 모듈들을 한꺼번에 초기화, 초기화 실패시 성공 및 실패 모듈 횟수를 튜플로 리턴
-    self.screen = pygame.display.set_mode(  # 윈도우 초기화, 생성. 파라미터:(윈도우 사이즈, 윈도우 타입, 뎁스, 등등)
-        (Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT))
+    self.screen = screen
     self.clock = pygame.time.Clock() # 시간 트래킹 객체 생성
     self.BASICFONT = pygame.font.Font('freesansbold.ttf', 18) # 폰트 (파일이름, 글자 크기)
     pygame.display.set_caption('Snake') #윈도우 창에 게임 이름 표시
@@ -107,6 +109,24 @@ class Game():
     for wormBody in self.snake.wormCoords[1:]:
       if wormBody['x'] == self.snake.wormCoords[self.snake.HEAD]['x'] and wormBody['y'] == self.snake.wormCoords[self.snake.HEAD]['y']:
         return self.resetGame()
+
+  def menu(self):
+    main_menu = Menu()
+
+    while main_menu.running:
+      self.clock.tick(60)
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          global running
+          main_menu.running = False
+          running = False
+
+      main_menu.logic()
+      screen.fill(Config.WHITE)
+      main_menu.render()
+      pygame.display.update()
+
 
   def showStartScreen(self):
     titleFont = pygame.font.Font('freesansbold.ttf', 100)

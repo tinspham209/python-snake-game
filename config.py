@@ -1,3 +1,4 @@
+import pygame
 class Config():
   FPS = 9
   MENU_FPS = 60
@@ -20,3 +21,6 @@ class Config():
   DARKGREEN = (0, 155, 0)
   DARKGRAY = (40, 40, 40)
   BG_COLOR = BLACK
+
+
+screen = pygame.display.set_mode((Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT))
