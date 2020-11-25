@@ -4,8 +4,8 @@ class Config():
   MENU_FPS = 60
 
   # 화면크기
-  WINDOW_WIDTH = 640
-  WINDOW_HEIGHT = 480
+  WINDOW_WIDTH = 1200
+  WINDOW_HEIGHT = 700
   CELLSIZE = 20 # 블록 크기
   assert WINDOW_WIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
   assert WINDOW_HEIGHT % CELLSIZE == 0, "Window height must be a multiple of cell size."
